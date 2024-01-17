@@ -1,0 +1,9 @@
+{
+"level":4,
+"headliners":
+    [
+    {"name": "Jinx", "headlined_trait": "Punk"},
+    {"name": "Corki", "headlined_trait": "8-bit"},
+    {"name": "Annie", "headlined_trait": "Emo"}
+    ]
+}

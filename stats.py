@@ -15,12 +15,16 @@ def rolls_needed_for_probability(rolldown_list, target_probability):
 
     return rolls_needed
 
-def get_stats(list):
-    probalities = [rolls_needed_for_probability(list, prob) for prob in [0.5, 0.75, 0.9]]
+def get_stats(list, probabilities=None):
+    """Compute statistics"""
+    if probabilities is None:
+        probabilities = [0.5, 0.75, 0.9]
+    
+    rolls_needed = [rolls_needed_for_probability(list, prob) for prob in probabilities]
     med = median(list)
     dev = stdev(list)
     
-    return probalities, med, dev
+    return rolls_needed, med, dev
 
 
 

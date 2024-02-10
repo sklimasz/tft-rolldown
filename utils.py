@@ -1,6 +1,5 @@
 import yaml
 import json
-from roll import Champion
 
 def load_json(path):
     with open(path, "r") as file:
@@ -12,20 +11,28 @@ def load_yaml(path):
         yaml_data = yaml.safe_load(file)
     return yaml_data
 
-def get_level_odds(level, path='data/levels.yml'):
-    level_data = load_yaml(path)
+def get_level_odds(level, level_data):
     for entry in level_data:
         if entry["level"] == level:
             level_odds = entry["odds"]
-    return level_odds
+            return level_odds
+    raise ValueError("Incorrect levels config")
 
-def prepare_data(level,
-                champions_path = "data/champions.json",
-                level_path = "data/levels.yml"):
-    champions_data = load_json(champions_path)
-    level_odds = get_level_odds(level=level, path=level_path)
-    champions = Champion.from_list(champions_data, level_odds)
-    return champions
+def prepare_champion_data(champions_data, level_data, pool_data):
+    prepared_data = []
+    for champion in champions_data:
+        if (odds := level_data[champion["cost"]]) != 0:
+            champion["odds"] = odds
+            champion["pool_size"] = pool_data[champion["cost"]]
+            prepared_data.append(champion)
+    return prepared_data
 
-
+def apply_pool_depletion(champions_data, simulation_data):
+    headliners = simulation_data["headliners"]
+    for headliner in headliners:
+        for champion in champions_data:
+            if headliner["name"] == champion["name"]:
+                champion["copies_taken"] = headliner.get("copies_taken", 0)
+                break
+    return champions_data
 

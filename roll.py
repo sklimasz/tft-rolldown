@@ -1,49 +1,14 @@
 from __future__ import annotations
 import random
-from dataclasses import dataclass, KW_ONLY
-
-@dataclass
-class Champion:
-    """Headliner representation"""
-    _ : KW_ONLY
-    name: str
-    cost: str | None = None
-    odds: int | float | None = None
-    traits: list[str] | None = None
-    headlined_trait: str | None = None
-
-    def __eq__(self, other):
-        """Define equality as champions having same name and same headlined trait"""
-        if isinstance(other, Champion):
-            name_match = (self.name == other.name)
-            headlined_trait_match = (self.headlined_trait == other.headlined_trait)
-            return (name_match and headlined_trait_match)
-
-        return False
-
-    @staticmethod
-    def from_list(champions_data:list[dict],
-                level_odds: dict[int | float] | None = None) -> list[Champion]:
-        """Create list of champion objects from list of dictionares"""
-        if level_odds is not None:
-            for champion_data in champions_data:
-                champion_data["odds"] = level_odds[champion_data["cost"]]
-        
-        champions = [
-            Champion(**champion_data)
-            for champion_data in champions_data
-            if champion_data.get("odds") != 0
-        ]
-        return champions
+from champion import Champion
     
 class RolldownSimulator:
-    def __init__(
-        self,
-        champions_list: list[Champion],
-        headliners_to_buy: list[str, str] | None = None,
+    def __init__(self,
+                champions: list[Champion],
+                headliners_to_buy: list[Champion]
     ):
-        self.champions_list = champions_list
-        self.weights = [champion.odds for champion in champions_list]
+        self.champions = champions
+        self.odds = [champion.odds*(champion.copies_left/champion.pool_size) for champion in champions]
         self.headliners_to_buy = headliners_to_buy
         self.last_seven_shops = []
         self.rolls_list = []
@@ -51,7 +16,7 @@ class RolldownSimulator:
     def choice_generator(self):
         """Generator yielding random headliner along with random headlined trait selected"""
         while True:
-            random_headliner = random.choices(self.champions_list, weights=self.weights)[0]
+            random_headliner = random.choices(self.champions, weights=self.odds)[0]
             headlined_trait = random.choice(random_headliner.traits)
             yield random_headliner, headlined_trait
 
@@ -82,7 +47,7 @@ class RolldownSimulator:
 
     def roll(
         self,
-        champions:  list[Champion] | None = None,
+        champions: list[Champion] | None = None,
         rolldowns: int = 10000,
         bad_luck_rules: bool = True,
         ) -> float:
@@ -105,10 +70,6 @@ class RolldownSimulator:
             Float: Average rolls needed to hit one of your requested headliners.
         """
 
-        # Default value is Sentinel Ekko
-        if champions is None:
-            champions = [Champion(name="Ekko", headlined_trait="Sentinel")]
-        
         generator = self.choice_generator()
         self.rolls_list = []
     
@@ -116,7 +77,7 @@ class RolldownSimulator:
             # Reset for every rolldown
             self.last_seven_shops = []
             rolls = 0
-            for champion in self.champions_list:
+            for champion in self.champions:
                 champion.headlined_trait = None
             
             # Rolls condition ensures script finishes.
@@ -137,7 +98,7 @@ class RolldownSimulator:
                 rolls += 1
 
                 # Update headlined_trait for rolled champion.
-                for champion in self.champions_list:
+                for champion in self.champions:
                     if champion.name == random_headliner.name:
                         champion.headlined_trait = headlined_trait
 

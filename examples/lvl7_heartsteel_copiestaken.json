@@ -2,8 +2,15 @@
 "level":7,
 "headliners":
     [
-    {"name": "Sett", "headlined_trait": "Heartsteel", "copies_taken": 10},
+    {"name": "Sett", "headlined_trait": "Heartsteel", "copies_taken": 3},
     {"name": "Yone", "headlined_trait": "Heartsteel", "copies_taken": 10},
-    {"name": "Aphelios", "headlined_trait": "Heartsteel", "copies_taken": 10}
+    {"name": "Aphelios", "headlined_trait": "Heartsteel", "copies_taken": 6}
+    ],
+"other":
+    [
+        {"name":"Ekko", "copies_taken": 7},
+        {"name":"Katarina", "copies_taken": 8},
+        {"cost":2, "copies_taken": 5},
+        {"cost":3, "copies_taken": 4}
     ]
 }

@@ -1,0 +1,9 @@
+{
+"level":7,
+"headliners":
+    [
+    {"name": "Sett", "headlined_trait": "Heartsteel", "copies_taken": 10},
+    {"name": "Yone", "headlined_trait": "Heartsteel", "copies_taken": 10},
+    {"name": "Aphelios", "headlined_trait": "Heartsteel", "copies_taken": 10}
+    ]
+}

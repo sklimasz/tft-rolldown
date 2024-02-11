@@ -4,10 +4,10 @@ from roll import Champion, RolldownSimulator
 from stats import get_stats
 
 @click.command()
-@click.option('--conf', help='Path to json file with with headliners and level data.')
-@click.option('--rolldowns', default=10000, help='Number of rolldowns.')
-@click.option('--rules', default=True, help='Whether to apply bad luck protection rules.')
-@click.option('--stats', default=True, help='Wheter to compute and display advanced stats.')
+@click.option('--conf', '-c', help='Path to json file with with headliners and level data.')
+@click.option('--rolldowns', '-r', default=10000, help='Number of rolldowns.')
+@click.option('--rules','-blr', default=True, help='Whether to apply bad luck protection rules.')
+@click.option('--stats', '-s', default=True, help='Wheter to compute and display advanced stats.')
 def cli(conf, rolldowns, rules, stats):
     # Load config
     conf = utils.load_json(conf)

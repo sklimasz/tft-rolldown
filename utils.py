@@ -1,24 +1,30 @@
-import yaml
 import json
+from pathlib import Path
 
-def load_json(path):
-    with open(path, "r") as file:
+import yaml
+
+
+def load_json(path: Path) -> dict:
+    """Load json file."""
+    with Path(path).open() as file:
         json_data = json.load(file)
     return json_data
 
-def load_yaml(path):
-    with open(path, 'r') as file:
+def load_yaml(path: Path) -> dict:
+    """Load yaml file."""
+    with Path(path).open() as file:
         yaml_data = yaml.safe_load(file)
     return yaml_data
 
-def get_level_odds(level, level_data):
+def get_level_odds(level: int, level_data: dict) -> dict:
+    """Get level odds from level dictionary."""
     for entry in level_data:
         if entry["level"] == level:
-            level_odds = entry["odds"]
-            return level_odds
+            return entry["odds"]
     raise ValueError("Incorrect levels config")
 
-def prepare_champion_data(champions_data, level_data, pool_data):
+def prepare_champion_data(champions_data: dict, level_data: dict, pool_data: dict) -> dict:
+    """Apply level odds and pool sizes to champion data."""
     prepared_data = []
     for champion in champions_data:
         if (odds := level_data[champion["cost"]]) != 0:
@@ -27,7 +33,8 @@ def prepare_champion_data(champions_data, level_data, pool_data):
             prepared_data.append(champion)
     return prepared_data
 
-def apply_pool_depletion(champions_data, simulation_data):
+def apply_pool_depletion(champions_data: dict, simulation_data: dict) -> dict:
+    """Apply copies taken to champion data."""
     headliners = simulation_data["headliners"]
     hd_names = {headliner["name"] for headliner in headliners}
     other = simulation_data.get("other", [])

@@ -1,28 +1,28 @@
 from __future__ import annotations
+
 import random
+
 from champion import Champion
-    
+
+
 class RolldownSimulator:
-    def __init__(self,
-                champions: list[Champion],
-                headliners_to_buy: list[Champion]
-    ):
+    def __init__(self, champions: list[Champion], headliners_to_buy: list[Champion]):
         self.champions = champions
-        self.odds = [champion.odds*(champion.copies_left/champion.pool_size) for champion in champions]
+        self.odds = [champion.odds*(champion.copies_left/champion.pool_size)
+                    for champion in champions]
         self.headliners_to_buy = headliners_to_buy
         self.last_seven_shops = []
         self.rolls_list = []
 
     def choice_generator(self):
-        """Generator yielding random headliner along with random headlined trait selected"""
+        """Yield random headliner along with random headlined trait selected."""
         while True:
             random_headliner = random.choices(self.champions, weights=self.odds)[0]
             headlined_trait = random.choice(random_headliner.traits)
             yield random_headliner, headlined_trait
 
     def bad_luck_rules(self, random_headliner: Champion, headlined_trait: str) -> bool:
-        """Checks if rolled headliner doesn't break bad luck protection rules"""
-
+        """Check if rolled headliner doesn't break bad luck protection rules."""
         # A champion with same headlined_trait cannot appear again with the same headlined trait.
         if random_headliner.headlined_trait == headlined_trait:
             return True
@@ -42,22 +42,17 @@ class RolldownSimulator:
         # Same headlined trait cannot appear for 4 shops.
         if headlined_trait in [champion.headlined_trait for champion in self.last_seven_shops[-4:]]:
             return True
-        
+
         return False
 
-    def roll(
-        self,
-        champions: list[Champion] | None = None,
-        rolldowns: int = 10000,
-        bad_luck_rules: bool = True,
-        ) -> float:
-        """
-        Roll for given headliners with a given headlined Trait.
+    def roll(self, rolldowns: int = 10000, bad_luck_rules: bool = True) -> float:
+        """Roll for given headliners with a given headlined Trait.
 
         Args:
+        ----
             champions (list[Champion] | None, optional): List of champions.
                 Defaults to None, which becomes Sentinel Ekko.
-                
+
             rolldowns (int, optional): Number of independent rolldowns.
                 The bigger the number, the more accurate the results.
                 Defaults to 10000.
@@ -67,26 +62,27 @@ class RolldownSimulator:
                 Defaults to True.
 
         Returns:
+        -------
             Float: Average rolls needed to hit one of your requested headliners.
-        """
 
+        """
         generator = self.choice_generator()
         self.rolls_list = []
-    
+
         for rolldown in range(rolldowns):
             # Reset for every rolldown
             self.last_seven_shops = []
             rolls = 0
             for champion in self.champions:
                 champion.headlined_trait = None
-            
+
             # Rolls condition ensures script finishes.
             while rolls < 1000:
                 # Get random headliner with random headlined trait.
                 random_headliner, headlined_trait = next(generator)
 
-                # If any of those rules is not met, we go back to random champion selection
-                # And we do not register it as a roll (such roll would not be offered).
+                # If bad luck rules are broken, we go back to random champion selection.
+                # We do not register it as a roll (such roll would not be offered).
                 if bad_luck_rules and self.bad_luck_rules(random_headliner, headlined_trait):
                     continue
 
@@ -111,7 +107,7 @@ class RolldownSimulator:
                     self.rolls_list.append(rolls)
                     break
 
-        # Return average rolls
+        # Return average rolls.
         self.avg_rolls = sum(self.rolls_list)/rolldowns
         return self.avg_rolls
 

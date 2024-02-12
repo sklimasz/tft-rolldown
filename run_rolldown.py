@@ -1,13 +1,15 @@
 import click
+
 import utils
 from roll import Champion, RolldownSimulator
 from stats import get_stats
 
+
 @click.command()
-@click.option('--conf', '-c', help='Path to json file with with headliners and level data.')
-@click.option('--rolldowns', '-r', default=10000, help='Number of rolldowns.')
-@click.option('--rules','-blr', default=True, help='Whether to apply bad luck protection rules.')
-@click.option('--stats', '-s', default=True, help='Wheter to compute and display advanced stats.')
+@click.option("--conf", "-c", help="Path to json file with with headliners and level data.")
+@click.option("--rolldowns", "-r", default=10000, help="Number of rolldowns.")
+@click.option("--rules","-blr", default=True, help="Whether to apply bad luck protection rules.")
+@click.option("--stats", "-s", default=True, help="Wheter to compute and display advanced stats.")
 def cli(conf, rolldowns, rules, stats):
     # Load config
     conf = utils.load_json(conf)
@@ -17,12 +19,12 @@ def cli(conf, rolldowns, rules, stats):
         raise ValueError("No level data in conf")
     if (headliners := conf.get("headliners")) is None:
         raise ValueError("No headliners data in conf")
-    
+
     # Echo conf data
     click.echo(f"\nRequested headliners at {level=}:")
     for headliner in headliners:
         click.echo(headliner)
-    
+
     # Prepare data
     champions_data = utils.load_json("data/champions.json")
     level_data = utils.load_yaml("data/levels.yml")
@@ -36,7 +38,7 @@ def cli(conf, rolldowns, rules, stats):
 
     # Simulate rolldown
     simulator = RolldownSimulator(champions=champions, headliners_to_buy=headliners)
-    avg_rolls = simulator.roll(champions=champions, rolldowns=rolldowns, bad_luck_rules=rules)
+    avg_rolls = simulator.roll(rolldowns=rolldowns, bad_luck_rules=rules)
 
     # Display results
     click.echo("\nRolldown results:")
@@ -52,6 +54,6 @@ def cli(conf, rolldowns, rules, stats):
         click.echo("Rolls needed to achieve probability:")
         for rolls_needed, prob in zip(rolls_needed_list, probabilities):
             click.echo(f"{rolls_needed} rolls -> {prob*100}%")
-    
+
 if __name__ == "__main__":
     cli()

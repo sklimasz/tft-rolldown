@@ -1,53 +1,45 @@
-import click
-import json
 import math
 
+import click
+
+from utils import load_json
+
+
 @click.command()
-@click.option('--lvl',default=8,help='current level')
-@click.option('--cost',default=4,help='cost of wanted champion')
-@click.option('--gold',default=80,help='your current gold')
-@click.option('--exp',default=30,help='experience missing to next level')
-
+@click.option("--lvl", "-l", default=8, help="Current level.")
+@click.option("--cost", "-c", default=4, help="Cost of wanted champion.")
+@click.option("--gold", "-g", default=80, help="Current gold.")
+@click.option("--exp", "-e", default=30, help="Experience missing to next level.")
 def cli(lvl, cost, gold, exp):
-    
-    data = load_json('data/odds.json')
-    levels = prepare(data,lvl)
-    results = rolldown(levels,cost,gold,exp)
-    outcome(results, cost)
+    data = load_json("data/odds.json")
+    odds = prepare_levels(data, lvl, cost)
+    results = rolldown(odds, gold, exp)
+    click.echo(f"Level {lvl} rolldown: {results[0]:.2f} {cost}-cost champs would appear in shops on average")
+    click.echo(f"Level {lvl+1} rolldown: {results[1]:.2f} {cost}-cost champs would appear in shops on average")
+
+def rolldown(odds: list[float | int], gold: int, exp: int) -> float:
+    """Simulate rolling at current and next level for a champion of given cost."""
+    # Get level odds.
+    curr_lvl_odds = odds[0]
+    next_lvl_odds = odds[1]
+
+    # Calculate average copies seen at current level.
+    wanted_costs_curr_lvl = 4*curr_lvl_odds*(gold//2)
+
+    # Calculate average copies seen at next level.
+    missing_exp = math.ceil(exp/4)
+    wanted_costs_next_lvl = next_lvl_odds*4*((gold-4*missing_exp)//2)
+    return wanted_costs_curr_lvl, wanted_costs_next_lvl
 
 
-def rolldown(levels, cost, gold, exp):
+def prepare_levels(data: dict, lvl: int, cost: int) -> list[float]:
+    """Find selected odds in dictionary."""
+    for index, elem in enumerate(data):
+        if elem["level"]==lvl:
+            curr_level_odds = elem["odds"][f"{cost}"]
+            next_level_odds = data[index+1]["odds"][f"{cost}"]
+            return curr_level_odds, next_level_odds
+    raise ValueError(f"No {lvl=} found in data.")
 
-    current_odds = levels[0]['odds'][f'{cost}']
-    nextlvl_odds = levels[1]['odds'][f'{cost}']
-
-    wanted_costs_INSTAROLL = current_odds*4*(gold//2)
-
-    levelups_bought = math.ceil(exp/4)
-    wanted_costs_LVLROLL = nextlvl_odds*4*((gold-4*levelups_bought)//2)
-
-    return wanted_costs_INSTAROLL, wanted_costs_LVLROLL
-
-def outcome(results,cost):
-
-    print(f'Instant rolldown: {results[0]} {cost}-cost champs would appear in shop on average')
-    print(f'Levelled rolldown: {results[1]} {cost}-cost champs would appear in shop on average')
-
-
-def prepare(data,lvl):
-    for elem in data:
-        if elem['level']==lvl:
-            currlvl = elem
-        if elem['level']==lvl+1:
-            nextlvl = elem
-
-    return currlvl,nextlvl
-
-def load_json(path):
-    with open(path, "r") as file:
-        json_data = json.load(file)
-
-    return json_data
-
-if __name__=='__main__':
+if __name__ == "__main__":
     cli()

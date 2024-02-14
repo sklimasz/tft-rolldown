@@ -1,8 +1,8 @@
+from pathlib import Path
+
 import click
 
-import utils
-from roll import Champion, RolldownSimulator
-from stats import get_stats
+from ..code import champion, roll, statistics, utils
 
 
 @click.command()
@@ -26,18 +26,20 @@ def cli(conf, rolldowns, rules, stats):
         click.echo(headliner)
 
     # Prepare data
-    champions_data = utils.load_json("data/champions.json")
-    level_data = utils.load_yaml("data/levels.yml")
+    path = Path(__file__).parent.resolve()
+    path_parent = path.parent.resolve()
+    champions_data = utils.load_json(path_parent / "data/champions.json")
+    level_data = utils.load_yaml(path_parent / "data/levels.yml")
     level_data = utils.get_level_odds(level = level, level_data=level_data )
-    pool_data = utils.load_yaml("data/champion_pool_sizes.yml")
+    pool_data = utils.load_yaml(path_parent / "data/champion_pool_sizes.yml")
 
     champions = utils.prepare_champion_data(champions_data, level_data, pool_data)
     champions = utils.apply_pool_depletion(champions, conf)
-    champions = Champion.from_list(champions)
-    headliners = Champion.from_list(headliners)
+    champions = champion.Champion.from_list(champions)
+    headliners = champion.Champion.from_list(headliners)
 
     # Simulate rolldown
-    simulator = RolldownSimulator(champions=champions, headliners_to_buy=headliners)
+    simulator = roll.RolldownSimulator(champions=champions, headliners_to_buy=headliners)
     avg_rolls = simulator.roll(rolldowns=rolldowns, bad_luck_rules=rules)
 
     # Display results
@@ -48,7 +50,7 @@ def cli(conf, rolldowns, rules, stats):
     if stats:
         rolls = simulator.rolls_list
         probabilities = [0.5, 0.75, 0.9]
-        rolls_needed_list, median, stdev = get_stats(rolls, probabilities)
+        rolls_needed_list, median, stdev = statistics.get_stats(rolls, probabilities)
         click.echo(f"median = {round(median, 2)}")
         click.echo(f"deviation  = {round(stdev, 2)}\n")
         click.echo("Rolls needed to achieve probability:")

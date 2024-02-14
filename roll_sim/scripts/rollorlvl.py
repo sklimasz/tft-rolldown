@@ -1,8 +1,9 @@
 import math
+from pathlib import Path
 
 import click
 
-from utils import load_json
+from ..code import utils
 
 
 @click.command()
@@ -11,7 +12,10 @@ from utils import load_json
 @click.option("--gold", "-g", default=80, help="Current gold.")
 @click.option("--exp", "-e", default=30, help="Experience missing to next level.")
 def cli(lvl, cost, gold, exp):
-    data = load_json("data/odds.json")
+    path = Path(__file__).parent.resolve()
+    path_parent = path.parent.resolve()
+
+    data = utils.load_json(path_parent / "data/odds.json")
     odds = prepare_levels(data, lvl, cost)
     results = rolldown(odds, gold, exp)
     click.echo(f"Level {lvl} rolldown: {results[0]:.2f} {cost}-cost champs would appear in shops on average")

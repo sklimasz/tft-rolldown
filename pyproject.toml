@@ -1,2 +1,31 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TFT-rolldown"
+
+authors = [
+    {name = "sklimasz", email = "szymon.klimaszewski12@gmail.com"},
+    {name = "klachans", email = "kajetan.lachanski@gmail.com"}
+]
+
+description = "Simulate TFT rolldowns."
+keywords = ["TFT", "rolldown", "simulator"]
+readme = "README.md"
+
+requires-python = ">=3.8"
+
+dependencies = [
+    "pytest>=8.0.0",
+    "click>=8.0.0"
+]
+
+dynamic = ["version"]
+
+[project.scripts]
+headliners = "roll_sim.scripts.run_rolldown:cli"
+roll_level = "roll_sim.scripts.rollorlvl:cli"
+
 [tool.ruff]
 select = ["ALL"]

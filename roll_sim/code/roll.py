@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import random
 
-from champion import Champion
+from ..code.champion import Champion
 
 
 class RolldownSimulator:

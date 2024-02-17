@@ -49,7 +49,6 @@ def level8_pool_depletion_harder(level8_executioner):
     conf = deepcopy(level8_executioner)
     for headliner in conf["headliners"]:
         headliner["copies_taken"] = 5
-    print(conf)
     return conf
 
 @pytest.fixture

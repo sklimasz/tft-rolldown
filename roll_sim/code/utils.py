@@ -20,17 +20,19 @@ def get_level_odds(level: int, level_data: dict) -> dict:
     """Get level odds from level dictionary."""
     for entry in level_data:
         if entry["level"] == level:
-            return entry["odds"]
+            return entry["odds"], entry["headliner_odds"]
     raise ValueError("Incorrect levels config")
 
 def prepare_champion_data(champions_data: dict,
-                        level_data: dict,
+                        level_data: list[dict, dict],
                         pool_data: dict) -> dict:
     """Apply level odds and pool sizes to champion data."""
     prepared_data = []
+    odds_dict, headliner_odds_dict = level_data
     for champion in champions_data:
-        if (odds := level_data[champion["cost"]]) != 0:
+        if (odds := odds_dict[champion["cost"]]) != 0:
             champion["odds"] = odds
+            champion["headliner_odds"] = headliner_odds_dict[champion["cost"]]
             champion["pool_size"] = pool_data[champion["cost"]]
             prepared_data.append(champion)
     return prepared_data
@@ -42,7 +44,9 @@ def apply_pool_depletion(champions_data: dict,
     for headliner in headliners:
         for champ in champions_data:
             if headliner["name"] == champ["name"]:
-                champ["copies_taken"] = headliner.get("copies_taken", 0)
+                data = {k:v for k,v in headliner.items() if k not in ["name", "headlined_trait"]}
+                # WTF different thing when champ = champ | data
+                champ |= data
                 break
 
     if other is not None:

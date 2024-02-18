@@ -11,10 +11,15 @@ class Champion:
     name: str
     cost: str | None = None
     odds: int | float | None = None
+
     traits: list[str] | None = None
     headlined_trait: str | None = None
+    headliner_odds: int | float | None = None
+
     pool_size: int = 0
     copies_taken: int = 0
+    copies_held: int = 0
+    copies_necessary: int = 9
 
     @property
     def copies_left(self) -> int:
@@ -24,8 +29,11 @@ class Champion:
         """Define equality as champions having same name and same headlined trait."""
         if isinstance(other, Champion):
             name_match = (self.name == other.name)
-            trait_match = (self.headlined_trait == other.headlined_trait)
-            return (name_match and trait_match)
+            if self.headlined_trait is not None and other.headlined_trait is not None:
+                headlined_trait_match = (self.headlined_trait == other.headlined_trait)
+                return name_match and headlined_trait_match
+
+            return name_match
         return False
 
     @staticmethod

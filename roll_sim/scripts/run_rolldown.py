@@ -13,7 +13,8 @@ from roll_sim.code.statistics import get_stats
 @click.option("--rolldowns", "-r", default=10000, help="Number of rolldowns.")
 @click.option("--rules","-blr", default=True, help="Whether to apply bad luck protection rules.")
 @click.option("--stats", "-s", default=True, help="Wheter to compute and display advanced stats.")
-def cli(conf, rolldowns, rules, stats):
+@click.option("--headliner_mechanic", "-h", default=True, help="Whether to apply include headliner mechanic.")
+def cli(conf, rolldowns, rules, stats, headliner_mechanic):
     # Load config
     conf = utils.load_json(conf)
 
@@ -35,8 +36,8 @@ def cli(conf, rolldowns, rules, stats):
     champions, headliners = prepare_data(path_data, headliners, level, other)
 
     # Simulate rolldown and get results.
-    simulator = RolldownSimulator(champions=champions, headliners_to_buy=headliners)
-    avg_rolls = simulator.roll(rolldowns=rolldowns, bad_luck_rules=rules)
+    simulator = RolldownSimulator(champions=champions, champions_to_buy=headliners)
+    avg_rolls = simulator.roll(rolldowns=rolldowns, bad_luck_rules=rules, headliner_mechanic=headliner_mechanic)
 
     # Display results.
     click.echo("\nRolldown results:")

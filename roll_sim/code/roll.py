@@ -36,10 +36,10 @@ class RolldownSimulator:
 
     def shop(self, headliner_shop):
         champs = []
-        # Normal shop logic
         normal_shops = 5 if not headliner_shop else 4
+        # Normal shop logic
         for shop in range(normal_shops):
-            champs.append( (champ := random.choices(self.champions, weights=self.odds)[0]) )
+            champs.append(champ := random.choices(self.champions, weights=self.odds)[0])
             champ.copies_taken += 1
 
         if headliner_shop:
@@ -49,7 +49,7 @@ class RolldownSimulator:
                 headlined_trait = random.choices(headliner.traits)[0]
 
                 # Check if bad luck rules apply or if copies_left is less than 3
-                if self.bad_luck_rules(headliner, headlined_trait) or headliner.copies_left < 3:
+                if not self.valid_headliner_shop(headliner, headlined_trait) or headliner.copies_left < 3:
                     continue  # Restart the loop if conditions are not met
                 
                 # If conditions are met, break out of the loop
@@ -63,7 +63,6 @@ class RolldownSimulator:
                 self.headliner_bought = True
                 headliner.copies_held += 3
 
-        # Common logic for both types of shops
         for champ in champs:
             if champ in self.champions_to_buy:
                 champ.copies_held += 1
@@ -71,32 +70,32 @@ class RolldownSimulator:
                 champ.copies_taken -= 1
 
 
-    def bad_luck_rules(self, random_headliner: Champion, headlined_trait: str) -> bool:
+    def valid_headliner_shop(self, random_headliner: Champion, headlined_trait: str) -> bool:
         """Check if rolled headliner doesn't break bad luck protection rules."""
         # A champion with same headlined_trait cannot appear again with the same headlined trait.
         if random_headliner.headlined_trait == headlined_trait:
-            return True
+            return False
 
         # 1, 2 and 3 cost headliners cannot appear again for 7 shops.
         if random_headliner.cost in [1, 2, 3] and random_headliner in self.last_seven_shops:
-            return True
+            return False
 
         # 4 costs headliner cannot appear again for 5 shops.
         if random_headliner.cost == 4 and random_headliner in self.last_seven_shops[-5:]:
-            return True
+            return False
 
         # 5 costs headliner cannot appear again for 4 shops.
         if random_headliner.cost == 5 and random_headliner in self.last_seven_shops[-4:]:
-            return True
+            return False
 
         # Same headlined trait cannot appear for 4 shops.
         if headlined_trait in [champion.headlined_trait for champion in self.last_seven_shops[-4:]]:
-            return True
+            return False
 
-        return False
+        return True
 
 
-    def roll(self, rolldowns: int = 1000, bad_luck_rules = True, headliner_mechanic = True) -> float:
+    def roll(self, rolldowns: int = 1000, headliner_mechanic = True) -> float:
         """Roll for given headliners with a given headlined Trait.
 
         Args:
@@ -117,30 +116,26 @@ class RolldownSimulator:
             Float: Average rolls needed to hit one of your requested headliners.
 
         """
-        self.rolls_list = []
-
         for rolldown in range(rolldowns):
             # Reset for every rolldown
             rolls = 0
             self.champions = deepcopy(self.champions_initial)
             self.last_seven_shops = []
             self.headliner_bought = False
-            print(f"{rolldown=}")
             shops_counter = 0
 
             # Rolls condition ensures script finishes.
             while rolls < 1000:
-                # Get random headliner with random headlined trait.
-                if (not self.headliner_bought) and headliner_mechanic:
-                    self.shop(headliner_shop=True)
-                elif ( (shops_counter % 4) == 0 and shops_counter) and headliner_mechanic:
-                    self.shop(headliner_shop=True)
-                    shops_counter = 0
+
+                if headliner_mechanic:
+                    if not self.headliner_bought or shops_counter % 4 == 0:
+                        self.shop(headliner_shop=True)
+                    else:
+                        self.shop(headliner_shop=False)
+                    shops_counter = 0 if shops_counter % 4 == 0 else shops_counter + 1
                 else:
                     self.shop(headliner_shop=False)
-                    shops_counter += 1
  
-                # If we pass all rules, we have a valid roll.
                 rolls += 1
 
                 # If found what requested, stop current rolldown.

@@ -24,7 +24,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=my_module --cov-report xml:cov.xml --junitxml=res.xml
+          pytest --cov=roll_sim --cov-report xml:cov.xml --junitxml=res.xml
       
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2

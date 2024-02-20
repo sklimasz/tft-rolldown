@@ -4,7 +4,7 @@ import click
 
 from roll_sim.code import utils
 from roll_sim.code.champion import Champion
-from roll_sim.code.roll import RolldownSimulator
+from roll_sim.code.roll_headliners import RolldownSimulator
 from roll_sim.code.statistics import get_stats
 
 

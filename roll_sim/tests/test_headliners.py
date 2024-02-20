@@ -1,7 +1,7 @@
 import pytest
 from roll_sim.code import utils
-from roll_sim.code.roll import RolldownSimulator
-from roll_sim.scripts import run_rolldown
+from roll_sim.code.roll_headliners import RolldownSimulator
+from roll_sim.scripts import headliner_rolldown
 from roll_sim.code import statistics
 from roll_sim.tests.fixtures import (
     level8_executioner,
@@ -13,13 +13,13 @@ from roll_sim.tests.fixtures import (
 from pathlib import Path
 
 def rolldown(conf, **kwargs):
-    headliners, level, other = run_rolldown.get_and_validate_data(conf)
+    headliners, level, other = headliner_rolldown.get_and_validate_data(conf)
 
     path_script = Path(__file__).parent.resolve()
     path_roll_sim = path_script.parent.resolve()
     path_data = path_roll_sim / "data"
 
-    champions, headliners = run_rolldown.prepare_data(path_data, headliners, level, other)
+    champions, headliners = headliner_rolldown.prepare_data(path_data, headliners, level, other)
 
     sim = RolldownSimulator(champions=champions, headliners_to_buy=headliners)
     avg_rolls = sim.roll(**kwargs)
@@ -28,12 +28,12 @@ def rolldown(conf, **kwargs):
 def test_conf_no_level(incorrect_conf_no_level):
     conf = incorrect_conf_no_level
     with pytest.raises(ValueError):
-        run_rolldown.get_and_validate_data(conf)
+        headliner_rolldown.get_and_validate_data(conf)
 
 def test_conf_headliners(incorrect_conf_no_headliners):
     conf = incorrect_conf_no_headliners
     with pytest.raises(ValueError):
-        run_rolldown.get_and_validate_data(conf)
+        headliner_rolldown.get_and_validate_data(conf)
 
 def test_simple_rolldown(level8_executioner):
     conf = level8_executioner

@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import random
 
-from ..code.champion import Champion
+from .champion import Champion
 
 
 class RolldownSimulator:
     def __init__(self, champions: list[Champion], headliners_to_buy: list[Champion]):
         self.champions = champions
-        self.odds = [champion.odds*(champion.copies_left/champion.pool_size)
+        self.odds = [champion.headliner_odds*(champion.copies_left/champion.pool_size)
                     for champion in champions]
         self.headliners_to_buy = headliners_to_buy
         self.last_seven_shops = []

@@ -25,7 +25,8 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-headliners = "roll_sim.scripts.run_rolldown:cli"
+rolldown = "roll_sim.scripts.rolldown:cli"
+headliners = "roll_sim.scripts.headliner_rolldown:cli"
 roll_level = "roll_sim.scripts.rollorlvl:cli"
 
 [tool.ruff]

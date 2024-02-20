@@ -24,7 +24,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest > coverage_report.txt
+          pytest --cov=roll_sim > coverage_report.txt
 
       - name: Display test results and coverage
         run: |

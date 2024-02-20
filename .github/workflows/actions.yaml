@@ -24,8 +24,17 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          pytest --cov=roll_sim > coverage_report.txt
+          pytest --cov=my_module --cov-report xml:cov.xml --junitxml=res.xml
+      
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
+        with:
+          files: |
+            res.xml
 
-      - name: Display test results and coverage
-        run: |
-          cat coverage_report.txt
+      - name: Coverage report
+        uses: 5monkeys/cobertura-action@master
+        with:
+          path: cov.xml
+          minimum_coverage: 66

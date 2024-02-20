@@ -43,9 +43,6 @@ def test_simple_rolldown(level8_executioner):
     avg_rolls = rolldown(conf=conf)
     assert 3 < avg_rolls < 15
 
-def test_fail():
-    assert 1 == 0
-
 def test_bad_luck_rules(level8_executioner):
     conf = level8_executioner
     avg_rolls_with_rules = rolldown(conf=conf)

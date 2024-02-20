@@ -25,6 +25,9 @@ def rolldown(conf, **kwargs):
     avg_rolls = sim.roll(**kwargs)
     return avg_rolls
 
+def test_fail():
+    assert 1 == 0
+
 def test_conf_no_level(incorrect_conf_no_level):
     conf = incorrect_conf_no_level
     with pytest.raises(ValueError):
@@ -39,6 +42,9 @@ def test_simple_rolldown(level8_executioner):
     conf = level8_executioner
     avg_rolls = rolldown(conf=conf)
     assert 3 < avg_rolls < 15
+
+def test_fail():
+    assert 1 == 0
 
 def test_bad_luck_rules(level8_executioner):
     conf = level8_executioner

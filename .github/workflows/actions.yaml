@@ -39,6 +39,7 @@ jobs:
 
       - name: Coverage report
         uses: 5monkeys/cobertura-action@master
+        if: always()
         with:
           path: cov.xml
           minimum_coverage: 66

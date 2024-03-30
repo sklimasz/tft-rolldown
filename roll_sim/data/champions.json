@@ -1,494 +1,246 @@
 [
-  {
-    "name": "Ahri",
-    "traits": [
-      "K/DA",
-      "Spellweaver"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Akali",
-    "traits": [
-      "K/DA",
-      "Executioner",
-      "Breakout"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Amumu",
-    "traits": [
-      "Emo",
-      "Guardian"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Annie",
-    "traits": [
-      "Emo",
-      "Spellweaver"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Aphelios",
-    "traits": [
-      "Heartsteel",
-      "Rapidfire"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Bard",
-    "traits": [
-      "Jazz",
-      "Dazzler"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Blitzcrank",
-    "traits": [
-      "Disco",
-      "Sentinel"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Caitlyn",
-    "traits": [
-      "8-bit",
-      "Rapidfire"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Corki",
-    "traits": [
-      "8-bit",
-      "Big Shot"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Ekko",
-    "traits": [
-      "True Damage",
-      "Spellweaver",
-      "Sentinel"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Evelynn",
-    "traits": [
-      "K/DA",
-      "Crowd Diver"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Ezreal",
-    "traits": [
-      "Heartsteel",
-      "Big Shot"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Gnar",
-    "traits": [
-      "Pentakill",
-      "Superfan",
-      "Mosher"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Gragas",
-    "traits": [
-      "Disco",
-      "Spellweaver",
-      "Bruiser"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Illaoi",
-    "traits": [
-      "ILLBEATS",
-      "Bruiser"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Jax",
-    "traits": [
-      "EDM",
-      "Mosher"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Jhin",
-    "traits": [
-      "Maestro",
-      "Big Shot"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Jinx",
-    "traits": [
-      "Punk",
-      "Rapidfire"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Karthus",
-    "traits": [
-      "Pentakill",
-      "Executioner"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Katarina",
-    "traits": [
-      "Country",
-      "Crowd Diver"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Kayle",
-    "traits": [
-      "Pentakill",
-      "Edgelord"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Kayn",
-    "traits": [
-      "Heartsteel",
-      "Edgelord",
-      "Wildcard"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Kennen",
-    "traits": [
-      "True Damage",
-      "Superfan",
-      "Guardian"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Lillia",
-    "traits": [
-      "K/DA",
-      "Superfan",
-      "Sentinel"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Lucian",
-    "traits": [
-      "Jazz",
-      "Rapidfire"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Lulu",
-    "traits": [
-      "Hyperpop",
-      "Spellweaver"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Lux",
-    "traits": [
-      "EDM",
-      "Dazzler"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Mordekaiser",
-    "traits": [
-      "Pentakill",
-      "Sentinel"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Nami",
-    "traits": [
-      "Disco",
-      "Dazzler"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Neeko",
-    "traits": [
-      "K/DA",
-      "Superfan",
-      "Guardian"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Pantheon",
-    "traits": [
-      "Punk",
-      "Guardian"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Poppy",
-    "traits": [
-      "Emo",
-      "Mosher"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Qiyana",
-    "traits": [
-      "True Damage",
-      "Crowd Diver"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Riven",
-    "traits": [
-      "8-bit",
-      "Edgelord"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Samira",
-    "traits": [
-      "Country",
-      "Executioner"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Senna",
-    "traits": [
-      "True Damage",
-      "Rapidfire"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Seraphine",
-    "traits": [
-      "K/DA",
-      "Spellweaver"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Sett",
-    "traits": [
-      "Heartsteel",
-      "Bruiser",
-      "Mosher"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Sona",
-    "traits": [
-      "Mixmaster",
-      "Spellweaver"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Taric",
-    "traits": [
-      "Disco",
-      "Guardian"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Thresh",
-    "traits": [
-      "Country",
-      "Guardian"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Twitch",
-    "traits": [
-      "Punk",
-      "Executioner"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Urgot",
-    "traits": [
-      "Country",
-      "Mosher"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Vex",
-    "traits": [
-      "Emo",
-      "Executioner"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Vi",
-    "traits": [
-      "Punk",
-      "Mosher"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Viego",
-    "traits": [
-      "Pentakill",
-      "Edgelord"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Yasuo",
-    "traits": [
-      "True Damage",
-      "Edgelord"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Yone",
-    "traits": [
-      "Heartsteel",
-      "Edgelord",
-      "Crowd Diver"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Yorick",
-    "traits": [
-      "Pentakill",
-      "Mosher",
-      "Guardian"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Zac",
-    "traits": [
-      "EDM",
-      "Bruiser"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Zed",
-    "traits": [
-      "EDM",
-      "Crowd Diver"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Ziggs",
-    "traits": [
-      "Hyperpop",
-      "Dazzler"
-    ],
-    "cost": 5
-  },
-  {
-    "name": "Miss Fortune",
-    "traits": [
-      "Jazz",
-      "Big Shot"
-    ],
-    "cost": 3
-  },
-  {
-    "name": "Olaf",
-    "traits": [
-      "Pentakill",
-      "Bruiser"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Tahm Kench",
-    "traits": [
-      "Country",
-      "Bruiser"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Twisted Fate",
-    "traits": [
-      "Disco",
-      "Dazzler"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "K'Sante",
-    "traits": [
-      "Heartsteel",
-      "Sentinel"
-    ],
-    "cost": 1
-  },
-  {
-    "name": "Kai'Sa",
-    "traits": [
-      "K/DA",
-      "Big Shot"
-    ],
-    "cost": 2
-  },
-  {
-    "name": "Akali",
-    "traits": [
-      "True Damage",
-      "Executioner",
-      "Breakout"
-    ],
-    "cost": 4
-  },
-  {
-    "name": "Garen",
-    "traits": [
-      "8-bit",
-      "Sentinel"
-    ],
-    "cost": 2
-  }
+    {
+        "name": "Aatrox",
+        "cost": 2
+    },
+    {
+        "name": "Ahri",
+        "cost": 1
+    },
+    {
+        "name": "Amumu",
+        "cost": 3
+    },
+    {
+        "name": "Annie",
+        "cost": 4
+    },
+    {
+        "name": "Aphelios",
+        "cost": 3
+    },
+    {
+        "name": "Ashe",
+        "cost": 4
+    },
+    {
+        "name": "Alune",
+        "cost": 3
+    },
+    {
+        "name": "Bard",
+        "cost": 3
+    },
+    {
+        "name": "Caitlyn",
+        "cost": 1
+    },
+    {
+        "name": "Cho'Gath",
+        "cost": 1
+    },
+    {
+        "name": "Darius",
+        "cost": 1
+    },
+    {
+        "name": "Galio",
+        "cost": 4
+    },
+    {
+        "name": "Garen",
+        "cost": 1
+    },
+    {
+        "name": "Hwei",
+        "cost": 5
+    },
+    {
+        "name": "Illaoi",
+        "cost": 3
+    },
+    {
+        "name": "Irelia",
+        "cost": 5
+    },
+    {
+        "name": "Janna",
+        "cost": 2
+    },
+    {
+        "name": "Kai'Sa",
+        "cost": 4
+    },
+    {
+        "name": "Kayn",
+        "cost": 4
+    },
+    {
+        "name": "Kha'Zix",
+        "cost": 1
+    },
+    {
+        "name": "Kindred",
+        "cost": 2
+    },
+    {
+        "name": "Kog'Maw",
+        "cost": 1
+    },
+    {
+        "name": "Lee Sin",
+        "cost": 4
+    },
+    {
+        "name": "Lillia",
+        "cost": 4
+    },
+    {
+        "name": "Lissandra",
+        "cost": 5
+    },
+    {
+        "name": "Lux",
+        "cost": 2
+    },
+    {
+        "name": "Malphite",
+        "cost": 1
+    },
+    {
+        "name": "Morgana",
+        "cost": 4
+    },
+    {
+        "name": "Neeko",
+        "cost": 2
+    },
+    {
+        "name": "Ornn",
+        "cost": 4
+    },
+    {
+        "name": "Qiyana",
+        "cost": 2
+    },
+    {
+        "name": "Senna",
+        "cost": 2
+    },
+    {
+        "name": "Sett",
+        "cost": 5
+    },
+    {
+        "name": "Shen",
+        "cost": 2
+    },
+    {
+        "name": "Riven",
+        "cost": 2
+    },
+    {
+        "name": "Sivir",
+        "cost": 1
+    },
+    {
+        "name": "Soraka",
+        "cost": 3
+    },
+    {
+        "name": "Sylas",
+        "cost": 4
+    },
+    {
+        "name": "Syndra",
+        "cost": 4
+    },
+    {
+        "name": "Tahm Kench",
+        "cost": 3
+    },
+    {
+        "name": "Teemo",
+        "cost": 2
+    },
+    {
+        "name": "Thresh",
+        "cost": 3
+    },
+    {
+        "name": "Tristana",
+        "cost": 3
+    },
+    {
+        "name": "Udyr",
+        "cost": 5
+    },
+    {
+        "name": "Volibear",
+        "cost": 3
+    },
+    {
+        "name": "Wukong",
+        "cost": 5
+    },
+    {
+        "name": "Yasuo",
+        "cost": 1
+    },
+    {
+        "name": "Yone",
+        "cost": 3
+    },
+    {
+        "name": "Yorick",
+        "cost": 2
+    },
+    {
+        "name": "Zoe",
+        "cost": 3
+    },
+    {
+        "name": "Zyra",
+        "cost": 2
+    },
+    {
+        "name": "Kobuko",
+        "cost": 1
+    },
+    {
+        "name": "Rek'Sai",
+        "cost": 1
+    },
+    {
+        "name": "Xayah",
+        "cost": 5
+    },
+    {
+        "name": "Gnar",
+        "cost": 2
+    },
+    {
+        "name": "Rakan",
+        "cost": 5
+    },
+    {
+        "name": "Jax",
+        "cost": 1
+    },
+    {
+        "name": "Diana",
+        "cost": 3
+    },
+    {
+        "name": "Azir",
+        "cost": 5
+    },
+    {
+        "name": "Nautilus",
+        "cost": 4
+    },
+    {
+        "name": "Xayah & Rakan",
+        "cost": 5
+    }
 ]

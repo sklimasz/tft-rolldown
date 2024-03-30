@@ -15,7 +15,7 @@ def cli(lvl, cost, gold, exp):
     path = Path(__file__).parent.resolve()
     path_parent = path.parent.resolve()
 
-    data = utils.load_json(path_parent / "data/odds.json")
+    data = utils.load_config(path_parent / "data/levels.yml")
     odds = prepare_levels(data, lvl, cost)
     results = rolldown(odds, gold, exp)
     click.echo(f"Level {lvl} rolldown: {results[0]:.2f} {cost}-cost champs would appear in shops on average")
@@ -40,8 +40,8 @@ def prepare_levels(data: dict, lvl: int, cost: int) -> list[float]:
     """Find selected odds in dictionary."""
     for index, elem in enumerate(data):
         if elem["level"]==lvl:
-            curr_level_odds = elem["odds"][f"{cost}"]
-            next_level_odds = data[index+1]["odds"][f"{cost}"]
+            curr_level_odds = elem["odds"][cost]
+            next_level_odds = data[index+1]["odds"][cost]
             return curr_level_odds, next_level_odds
     raise ValueError(f"No {lvl=} found in data.")
 

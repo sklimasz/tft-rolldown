@@ -1,0 +1,10 @@
+level: 5
+champs_to_buy:
+  - name: Caitlyn
+  - name: Rek'Sai
+  - name: Jax
+other:
+  - cost: 1
+    copies_taken: 2
+  - name: Ahri
+    copies_taken: 5
